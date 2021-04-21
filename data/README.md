@@ -1,10 +1,10 @@
 # Data Description: IMDB popular movies data
 
-We use the `IMDB_movies.csv` dataset available at 
-<https://github.com/reisanar/datasets/blob/master/IMDB_movies.csv>
+We use the `PatreonTop1000.csv` dataset available at 
+<https://www.kaggle.com/akhandpratap/patreon-top-creators>
 
-This dataset includes information of popular movies on IMDB in the last 10 years. 
+This dataset includes information of The Top 1000 Patreon Accounts from 6 months ago. 
 
-The data fields included are: Title, Genre, Description, Director, Actors, Year, Runtime, Rating, Votes, Revenue, Metascore (score of the movie on the metacritic website)
+The data fields included are: Creator, Creator_Url, Description, Rank, Date, Patrons, Rating, DaysRunning, Launched (score of the movie on the metacritic website)
 
 Below we include some basic statistics for this datasets, including dimensions and range of years:

@@ -6,11 +6,11 @@ Team members:
 
 - Student 1 [Rei](mailto:rsanchezarias@floridapoly.edu)
 
-- Student 2 [Student 2](mailto:student2@floridapoly.edu)
+- Student 2 [Jasmine Williams] (jwilliams8080@floridapoly.edu)
 
-- Student 3 [Student 3](mailto:student3@floridapoly.edu)
+- Student 3 [Xavier Moore](xmoore7867@floridapoly.edu)
 
 
-Our project investigates the main characteristics of popular movies in recent years.
+Our project investigates the trends in the Top 1000 most successful patreon accounts.
 We will be using the data available at: 
-<https://github.com/reisanar/datasets/blob/master/IMDB_movies.csv> 
+<https://www.kaggle.com/thomaskonstantin/top-1000-patreons> 

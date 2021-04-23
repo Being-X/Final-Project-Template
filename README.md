@@ -6,7 +6,7 @@ Team members:
 
 - Student 1 [Rei](mailto:rsanchezarias@floridapoly.edu)
 
-- Student 2 [Jasmine Williams] (jwilliams8080@floridapoly.edu)
+- Student 2 [Jasmine Williams](jwilliams8080@floridapoly.edu)
 
 - Student 3 [Xavier Moore](xmoore7867@floridapoly.edu)
 

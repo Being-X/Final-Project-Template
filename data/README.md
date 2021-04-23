@@ -1,4 +1,4 @@
-# Data Description: IMDB popular movies data
+# Data Description: How to Make the Perfect Patreon.
 
 We use the `patreon2.csv` dataset available at 
 <https://www.kaggle.com/thomaskonstantin/top-1000-patreons>

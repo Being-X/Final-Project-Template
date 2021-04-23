@@ -4,11 +4,11 @@
 
 Team members: 
 
-- [Rei](mailto:rsanchezarias@floridapoly.edu)
+- Student 1 [Rei](mailto:rsanchezarias@floridapoly.edu)
 
-- Jasmine Williams [Student 2](jwilliams@floridapoly.edu)
+- Student 2 [Student 2](mailto:student2@floridapoly.edu)
 
-- Xavier Moore [Student 3](xmoore7867@floridapoly.edu)
+- Student 3 [Student 3](mailto:student3@floridapoly.edu)
 
 
 Our project investigates the main characteristics of popular movies in recent years.

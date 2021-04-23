@@ -1,0 +1,177 @@
+---
+title: "Project Proposal"
+output: html_notebook
+---
+
+## Section 1. Introduction
+
+
+
+## Section 2. Data Analysis Plan
+
+## Section 3. Data
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(stringr)
+```
+```{r}
+Final_Project_Dataset <- read_csv("../data/patreon2.csv")
+```
+
+
+```{r}
+music <- "music|house|trap|rap| R&B| classical|funk|pop|hispanic|latin|edm|rock|jazz|ukelele|guitar|piano|drum|covers|music video|Music|House| Trap| Rap| r&b| Classical| Funk| Hispanic|Classical|Funk|Pop|Hispanic|Latin|EDM|Rock|Jazz|Ukelele|Guitar|Piano|Drum|Covers|Music Video| Music Video|MUSIC" 
+art <- "art|tutorials|sculpt|paint|render|3D| comic|animation|cartoons|cartoon|NSFW|18+|adult|porn|Porn|Adult|nsfw|18|Cartoon|Cartoons|Animation|CGI|cgi|Render|Tutorials|Art|3D Model|3D model"
+podcasts <- "podcast|Podcast|Podcasts|podcasts|Sports|Comedy|Crime|rant|crime|comedy|video game|history|politics"
+video <- "video|Video|youtube|ASMR|Vlog|youtube|video essay|gaming|video games|video gaming|reaction|skits|photography|Video|asmr|vlog|YouTube|Video essay|Video Essay|Gaming|Video gaming|Video Gaming|Documentary|documentary|Documentaries|documentaries|Commentary|commentary"
+```
+
+
+
+```{r}
+Final_Project_Dataset %>%
+  filter(str_detect(Theme, music))
+Final_Project_Dataset %>%
+  filter(str_detect(Theme, art))
+Final_Project_Dataset %>%
+  filter(str_detect(Theme, podcasts))
+Final_Project_Dataset %>%
+  filter(str_detect(Theme, video))
+```
+
+
+
+```{r}
+Patreon_Video <- Final_Project_Dataset %>%
+  filter(str_detect(Theme, video)) %>%
+  mutate(Category = "Video")
+Patreon_Music <- Final_Project_Dataset %>%
+  filter(str_detect(Theme, music)) %>%
+  mutate(Category = "Music")
+Patreon_Podcast <- Final_Project_Dataset %>%
+  filter(str_detect(Theme, podcasts)) %>%
+  mutate(Category = "Podcast")
+Patreon_Art <- Final_Project_Dataset %>%
+  filter(str_detect(Theme, art)) %>%
+  mutate(Category = "Art")
+```
+
+```{r}
+Perfected_Patreon <- bind_rows(Patreon_Art,Patreon_Music,Patreon_Podcast,Patreon_Video)
+```
+
+
+```{r}
+Perfected_Patreon %>%
+  group_by(Category) %>%
+  ggplot() +
+  geom_bar(aes(x = Category)) + labs(Title = "The Most Popular Content Categories", x = "Content Categories", y = "The Number of Content Creators")
+```
+Video is the best
+
+```{r}
+Video_Patreon <- Perfected_Patreon %>%
+  filter(grepl("Video", Category))
+```
+
+Best type of video content.
+
+
+```{r}
+YouTube <- "YouTube|youtube|reaction|Reaction"
+ASMR <- "ASMR|asmr|a.s.m.r."
+gaming <- "Video Games|video games|gaming|game"
+documentaries <- "Documentaries|documentaries|documentary"
+interviews <- "Interview|interview"
+vlog <- "Vlog|vlog"
+Commentary <- "Commentary|commentary"
+essays <- "Video essay|video essay|Video Essay|history|History"
+comedy <- "skit|Skit|Comedy|comedy|humor|Humor"
+```
+
+
+
+```{r}
+Video_Patreon %>%
+  filter(str_detect(Theme, YouTube))
+Video_Patreon %>%
+  filter(str_detect(Theme, ASMR))
+Video_Patreon %>%
+  filter(str_detect(Theme, gaming))
+Video_Patreon %>%
+  filter(str_detect(Theme, documentaries))
+Video_Patreon %>%
+  filter(str_detect(Theme, interviews))
+Video_Patreon %>%
+  filter(str_detect(Theme, Commentary))
+Video_Patreon %>%
+  filter(str_detect(Theme, vlog))
+Video_Patreon %>%
+  filter(str_detect(Theme, essays))
+Video_Patreon %>%
+  filter(str_detect(Theme, comedy))
+```
+
+
+```{r}
+Patreon_YouTube <- Video_Patreon %>%
+  filter(str_detect(Theme, YouTube)) %>%
+  mutate(Subcategory = "YouTuber")
+Patreon_ASMR <- Video_Patreon %>%
+  filter(str_detect(Theme, ASMR)) %>%
+  mutate(Subcategory = "ASMR")
+Patreon_Gaming <- Video_Patreon %>%
+  filter(str_detect(Theme, gaming)) %>%
+  mutate(Subcategory = "Video Games")
+Patreon_Documentary <- Video_Patreon %>%
+  filter(str_detect(Theme, documentaries)) %>%
+  mutate(Subcategory = "Docuseries")
+Patreon_Interview <- Video_Patreon %>%
+  filter(str_detect(Theme, interviews)) %>%
+  mutate(Subcategory = "Interviewing")
+Patreon_Commentator <- Video_Patreon %>%
+  filter(str_detect(Theme, Commentary)) %>%
+  mutate(Subcategory = "Commentator")
+Patreon_Vlog <- Video_Patreon %>%
+  filter(str_detect(Theme, vlog)) %>%
+  mutate(Subcategory = "Vlogger")
+Patreon_Essay <- Video_Patreon %>%
+  filter(str_detect(Theme, essays)) %>%
+  mutate(Subcategory = "Video Essay")
+Patreon_Comedy <- Video_Patreon %>%
+  filter(str_detect(Theme, comedy)) %>%
+  mutate(subcategory = "Comedian")
+```
+
+
+```{r}
+Patreon_Video_2.0 <- bind_rows(Patreon_ASMR,Patreon_Comedy,Patreon_Commentator,Patreon_Documentary,Patreon_Essay,Patreon_Gaming,Patreon_Interview,Patreon_YouTube)
+```
+
+
+```{r}
+Patreon_Video_2.0 %>%
+  group_by(Subcategory) %>%
+  ggplot() +
+  geom_bar(aes(x = Subcategory)) + labs(x = "Types of Videos", y = "The Number of Content Creators")
+```
+
+
+```{r}
+Perfected_Patreon %>%
+  mutate(Per_Patron2.0 = str_extract(`Per patron`,"\\d+\\.*\\d+"),
+         Per_Patron2.0 = as.numeric(Per_Patron2.0)) %>%
+  mutate(Income_By_Thousand = str_extract(`Earnings`,"\\d+"),
+         Income_By_Thousand = as.numeric(Income_By_Thousand))
+  
+```
+
+
+```{r}
+Perfected_Patreon3.0 %>%
+  summarise(mean = mean(`Per_Patron2.0`, na.rm = TRUE))
+```
+

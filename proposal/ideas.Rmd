@@ -8,4 +8,10 @@ output: html_notebook
 ## Section 2. Data Analysis Plan
 
 ## Section 3. Data
+```{r}
+library(tidyverse)
+```
+```{r}
+Final_Project_Dataset <- read_csv("../data/patreon2.csv")
+```
 

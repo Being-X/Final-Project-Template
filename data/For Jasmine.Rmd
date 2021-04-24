@@ -5,9 +5,19 @@ output: html_notebook
 
 ## Section 1. Introduction
 
+```{r}
+summary(Perfected_Patreon3.0)
+```
+
+
+
 
 
 ## Section 2. Data Analysis Plan
+
+1) Fix Data to make it more usable.
+2) Find Best Genre, Sub-genre, and Average Income for Patreon Users.
+3) Create Graphics.
 
 ## Section 3. Data
 ```{r}
@@ -20,7 +30,7 @@ library(stringr)
 ```{r}
 Final_Project_Dataset <- read_csv("../data/patreon2.csv")
 ```
-
+### Loading .csv File and necessary packages for the assignment
 
 ```{r}
 music <- "music|house|trap|rap| R&B| classical|funk|pop|hispanic|latin|edm|rock|jazz|ukelele|guitar|piano|drum|covers|music video|Music|House| Trap| Rap| r&b| Classical| Funk| Hispanic|Classical|Funk|Pop|Hispanic|Latin|EDM|Rock|Jazz|Ukelele|Guitar|Piano|Drum|Covers|Music Video| Music Video|MUSIC" 
@@ -29,7 +39,7 @@ podcasts <- "podcast|Podcast|Podcasts|podcasts|Sports|Comedy|Crime|rant|crime|co
 video <- "video|Video|youtube|ASMR|Vlog|youtube|video essay|gaming|video games|video gaming|reaction|skits|photography|Video|asmr|vlog|YouTube|Video essay|Video Essay|Gaming|Video gaming|Video Gaming|Documentary|documentary|Documentaries|documentaries|Commentary|commentary"
 ```
 
-
+### Creating Character Arrays to filter and sift through rows and organize them based on the tags in each array
 
 ```{r}
 Final_Project_Dataset %>%
@@ -42,7 +52,7 @@ Final_Project_Dataset %>%
   filter(str_detect(Theme, video))
 ```
 
-
+### Filtering rows based on Array Categories.
 
 ```{r}
 Patreon_Video <- Final_Project_Dataset %>%
@@ -59,26 +69,28 @@ Patreon_Art <- Final_Project_Dataset %>%
   mutate(Category = "Art")
 ```
 
+### Creating new datases to merge into a more usable spreadsheet.
+
 ```{r}
 Perfected_Patreon <- bind_rows(Patreon_Art,Patreon_Music,Patreon_Podcast,Patreon_Video)
 ```
 
-
+### Merging into a more usable spreadsheet.
 ```{r}
 Perfected_Patreon %>%
   group_by(Category) %>%
   ggplot() +
   geom_bar(aes(x = Category)) + labs(Title = "The Most Popular Content Categories", x = "Content Categories", y = "The Number of Content Creators")
 ```
-Video is the best
+### Grouping and filtering content to determine which category is the best.
+#### Conclusion: Video is the best.
 
 ```{r}
 Video_Patreon <- Perfected_Patreon %>%
   filter(grepl("Video", Category))
 ```
 
-Best type of video content.
-
+### Creating new spreadsheet to find the best subcategory of video content on patreon.
 
 ```{r}
 YouTube <- "YouTube|youtube|reaction|Reaction"
@@ -92,7 +104,7 @@ essays <- "Video essay|video essay|Video Essay|history|History"
 comedy <- "skit|Skit|Comedy|comedy|humor|Humor"
 ```
 
-
+### Repeating Previous steps from line 42-90.
 
 ```{r}
 Video_Patreon %>%
@@ -161,7 +173,7 @@ Patreon_Video_2.0 %>%
 
 
 ```{r}
-Perfected_Patreon %>%
+Perfected_Patreon3.0 <- Perfected_Patreon %>%
   mutate(Per_Patron2.0 = str_extract(`Per patron`,"\\d+\\.*\\d+"),
          Per_Patron2.0 = as.numeric(Per_Patron2.0)) %>%
   mutate(Income_By_Thousand = str_extract(`Earnings`,"\\d+"),
@@ -169,9 +181,28 @@ Perfected_Patreon %>%
   
 ```
 
+## Extracting digits in character strings into more usbale numerical values 
 
 ```{r}
 Perfected_Patreon3.0 %>%
-  summarise(mean = mean(`Per_Patron2.0`, na.rm = TRUE))
+  ggplot() + geom_pointt(aes(y = `Income_By_Thousand`, x = `Patrons`, na.rm = TRUE))
+```
+## Graphical experiments
+
+```{r}
+Perfected_Patreon3.0 %>%
+  ggplot() + geom_boxplot(aes(x = `Income_By_Thousand`, na.rm = TRUE))
 ```
 
+
+
+```{r}
+Perfected_Patreon3.0 %>%
+  summarise(Average_Price = mean(`Per_Patron2.0`, na.rm = TRUE))
+Perfected_Patreon3.0 %>%
+  summarise(Average_Time = mean(`Days Running`/365, na.rm = TRUE))
+Perfected_Patreon3.0 %>%
+  summarise(Average_Earnings = mean(`Income_By_Thousand`, na.rm = TRUE))
+```
+
+## Answering simple question regarding averages for numerical values.
